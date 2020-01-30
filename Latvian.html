@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latvian Words Conjunction</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+	font-size: 1em;
+	padding: 2px;
+}
+
+table tr{
+	font-size: 1em;
+	padding: 5px;
+}
+
+table td{
+	font-size: 1em;
+	padding: 5px;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+fieldset {
+	border: 0;
+}
+
+label {
+	display: block;
+	margin: 30px 0 0 0;
+}
+
+.overflow {
+	height: 200px;
+}
+
+.header-style{
+	background-color: #bfa52e;
+	text-align: center; 
+}
+
+.row-style{
+	background-color: #8faef2;
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function() {
+
+		$( "#accordion" ).accordion({
+			heightStyle: "content"
+		});
+		
+		$("#prepositionDDL").selectmenu();
+		
+		var sexthDeclarWords = ["acs","asins","ass","auss","avs","balss","brokastis","birzs","cilts","cēsis","dakts","debess","duris","durvis",
+				"dzelzs","govs","guns","haizivs","krāsns","krūtis","klints","kūts","klēts","kvīts","maksts","nakts","nots","nāss",
+				"pils","pults","plīts","pirts","sirds","smiltis","šalts","tāss","telts","takts","uguns","uts",
+				"valsts","vantis","vēsts","zivs","zoss","ģints","ļaudis"];
+		
+		var exceptionsList = ["mēness", "akmens", "asmens", "rudens", "ūdens", "zibens", "sāls"];
+		
+		var exchange = [["s", "š"], ["t", "š"], ["z", "ž"], ["d", "ž"], ["c", "č"], ["l", "ļ"], ["n", "ņ"], 
+							["p", "pj"], ["b", "bj"], ["m", "mj"], ["v", "vj"]];
+				
+		var questions = ["Kās?", "Kā?", "Kam?", "Ko?", "Kur?", "Kās?", "Kā?", "Kam?", "Ko?", "Kur?"];
+		
+		var wordConjunction = {
+			decalre_1 : {
+				singularLength: 1,                                                   
+				pluralLength: 1,
+				declarationList: ["s", "a", "am", "u", "ā", "i", "u", "iem", "us", "os"]
+			},
+			decalre_1E : {
+				singularLength: 1,
+				pluralLength: 1,
+				declarationList: ["s", "s", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+			},
+			decalre_2 : {
+				singularLength: 2,
+				pluralLength: 1,
+				declarationList: ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+			},
+			decalre_3 : {
+				singularLength: 2,
+				pluralLength: 1,
+				declarationList: ["us", "us", "um", "u", "ū", "i", "u", "iem", "us", "os"]
+			},
+			decalre_4 : {
+				singularLength: 1,
+				pluralLength: 2,
+				declarationList: ["a", "as", "ai", "u", "ā", "as", "u", "ām", "as", "ās"]
+			},
+			decalre_5 : {
+				singularLength: 1,
+				pluralLength: 2,
+				declarationList: ["e", "es", "ei", "i", "ē", "es", "*u", "ēm", "es", "ēs"]
+			},
+			decalre_6 : {
+				singularLength: 1,
+				pluralLength: 2,
+				declarationList: ["s", "s", "ij", "i", "ī", "is", "*u", "īm", "is", "īs"]
+			}
+		}
+		
+		function checkSixthWords(wordToCheck)
+		{
+			for( var i = 0; i < sexthDeclarWords.length; i++)
+			{
+				if(wordToCheck === sexthDeclarWords[i])
+					return true;
+			}
+			
+			return false;
+		}
+		
+		function checkExceptionWords(wordToCheck)
+		{
+			for( var i = 0; i < exceptionsList.length; i++)
+			{
+				if(wordToCheck === exceptionsList[i])
+					return true;
+			}
+			
+			return false;
+		}
+		
+		function returnDeclaration(word)
+		{
+			var wordLower = word.toLowerCase();
+			
+			var wordEnding = wordLower.substr(wordLower.length-4, wordLower.length);
+			
+			//check words with ending pils like Daugavapils
+			if(wordEnding === "pils")
+			{
+				return "6_s";
+			}
+			
+			//Check words with ending 2 characters
+			wordEnding = wordLower.substr(wordLower.length-2, wordLower.length);
+			if(wordEnding === "is")
+			{
+				if(checkSixthWords(wordLower) == true)
+					return "6_p";
+				else
+					return "2_s";
+			}
+			else if (wordEnding === "us")
+			{
+				return "3_s";
+			}
+			else if (wordEnding === "as")
+			{
+				return "4_p"
+			}
+			else if (wordEnding === "es")
+			{
+				return "5_p"
+			}
+			
+			//Check words with ending 1 character
+			wordEnding = wordLower.substr(wordLower.length-1, wordLower.length);
+			
+			if(wordEnding === "s" || wordEnding === "š")
+			{
+				if(checkSixthWords(wordLower) == true)
+					return "6_s";
+				else if(checkExceptionWords(wordLower) == true)
+					return "1E_s";
+				else if(wordLower === "suns")
+					return "2_s";
+				else
+					return "1_s";
+			}
+			else if(wordEnding === "a")
+				return "4_s"
+			else if (wordEnding === "e")
+				return "5_s"
+			else if (wordEnding === "i")
+				return "1_p";
+				
+			return "";
+		}
+		
+		function returnConjunction(word, type)
+		{
+			var wordConjunctionList;
+			
+			// Split type into declaration and singular or plural
+			var splitType = type.split("_");
+			
+			if(splitType.length == 2)
+			{
+				var declaration = splitType[0];
+				var singPlur = splitType[1];
+				
+				// find the corresponding declaration
+				var declarationItem = wordConjunction["decalre_" + declaration];
+				var isSinglare = (singPlur === "s") ? true : false;
+				var endingLength = (isSinglare == true) ? declarationItem["singularLength"] : declarationItem["pluralLength"];
+				var declarationList = declarationItem["declarationList"];
+				
+				// Change ending
+				wordConjunctionList = changeEnding(word, declarationList, endingLength, isSinglare);
+			}
+			else
+				wordConjunctionList = ["-----", "-----", "-----", "-----", "-----", "-----", "-----", "-----", "-----", "-----"]
+			
+			//alert(wordConjunctionList);
+			return wordConjunctionList;
+		}
+		
+		function changeExchangeEndingWord(word){
+		
+			var wordLower = word.toLowerCase();
+			
+			var wordEnding = wordLower.substr(wordLower.length-2, wordLower.length);
+			
+			if(wordEnding == "sn")
+				return word.substring(0, word.length-2) + "šņ";
+			
+			wordEnding = wordLower.substr(wordLower.length-1, wordLower.length);
+			for(var i = 0; i < exchange.length; i++)
+			{
+				if(wordEnding == exchange[i][0])
+					return word.substring(0, word.length-1) +exchange[i][1];
+			}
+			
+			return word;
+		}
+		
+		function changeEnding(word, endingList, endingLength, isSingular)
+		{
+			var wordConjunction = [];
+			
+			if(isSingular)
+				wordConjunction.push(word)
+			else
+				wordConjunction.push("----");
+				
+			for(var i = 1; i < endingList.length; i++)
+			{
+				if(!isSingular && i <= 5)
+				{
+					if (i == 5)
+						wordConjunction.push(word);
+					else
+						wordConjunction.push("----");
+						
+					continue;
+				}
+				
+				var endingChar = endingList[i];
+				var newWord = word.substring(0, word.length - endingLength);
+				
+				//check * in ending
+				if(endingChar.substring(0, 1) == "*")
+				{
+					endingChar = endingChar.substring(1, endingChar.length);
+					newWord = changeExchangeEndingWord(newWord);
+				}
+				
+				newWord = newWord + endingChar;
+				wordConjunction.push(newWord);
+			}
+			
+			return wordConjunction;
+		}
+		
+		$( "#wordConjunctionBtn" ).click( function( event ) {
+		      event.preventDefault();
+		    
+			var type = returnDeclaration($("#wordId")[0].value.trim());
+			var wordConjunction = returnConjunction($("#wordId")[0].value.trim(), type)
+			
+			// delete all rows
+			var table = document.getElementById("tableConjunction");
+			while(table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+			
+			var count = 0;
+			var row = table.insertRow(count);
+			row.className = "header-style";
+			var cell = row.insertCell(0);
+			cell.innerHTML = "Vienskaitlis";
+			cell.colSpan = 2;
+			
+			count++;
+			for(var i = 0; i < wordConjunction.length; i++)
+			{
+			
+				if(i == 5)
+				{
+					row = table.insertRow(count);
+					row.className = "header-style";
+					cell = row.insertCell(0);
+					cell.innerHTML = "Daudzskaitlis";
+					cell.colSpan = 2;
+					cell.className = "header-style";
+					count++;
+				}
+				
+				row = table.insertRow(count);
+				row.className = "row-style";
+				cell = row.insertCell(0);
+				cell.innerHTML = questions[i];
+				
+				cell = row.insertCell(1);
+				cell.innerHTML = wordConjunction[i];
+				
+				count++;
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="accordion">
+		<h3>Word Conjunction</h3>
+		<div class="wordConjunctionDiv">
+			<form action="#" id="wordConjunctionForm">
+				<fieldset>
+					<label for="wordId">Enter a word</label> 
+					<input type="text" id="wordId" name="wordName" />				
+						
+				</fieldset>
+					
+				<button class="ui-button ui-widget ui-corner-all" id="wordConjunctionBtn">Show Conjunction</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tableConjunction"></table>
+					
+			</form>
+		</div>
+		<h3>Word with Preposition</h3>
+		<div class="wordPrepositionDiv">
+			<form action="#" id="wordPrepositionForm">
+				<fieldset>
+					<table border=0>
+						<tr>
+							<td><label for="prepositionDDL">Choose a preposition</label> </td>
+							<td><label for="wordPrepositionId">Enter a word</label> </td>
+						</tr>
+						<tr>
+							<td>
+								<select name="prepositionDDL" id="prepositionDDL">
+									<option value="0">Disconnected</option>
+									<option value="1">Connected</option>
+								</select>
+							</td>
+							<td><input type="text" id="wordPrepositionId" name="wordPrepositionName" /></td>
+						</tr>
+					</table>
+				</fieldset>
+					
+				<button class="ui-button ui-widget ui-corner-all" id="wordPrepositionBtn">Show Conjunction</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tablePreposition"></table>
+					
+			</form>
+		</div>
+		<h3>Word with Adjective</h3>
+		<div></div>
+	</div>
+</body>
+</html>
