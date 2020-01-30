@@ -86,6 +86,11 @@ label {
 				pluralLength: 1,
 				declarationList: ["s", "s", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
 			},
+			decalre_2E : {
+				singularLength: 1,
+				pluralLength: 1,
+				declarationList: ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+			},
 			decalre_2 : {
 				singularLength: 2,
 				pluralLength: 1,
@@ -179,7 +184,7 @@ label {
 				else if(checkExceptionWords(wordLower) == true)
 					return "1E_s";
 				else if(wordLower === "suns")
-					return "2_s";
+					return "2E_s";
 				else
 					return "1_s";
 			}
