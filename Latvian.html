@@ -23,7 +23,7 @@ table tr{
 
 table td{
 	font-size: 1em;
-	padding: 5px;
+	padding: 7px;
 }
 
 .ui-draggable, .ui-droppable {
@@ -51,6 +51,13 @@ label {
 .row-style{
 	background-color: #8faef2;
 }
+
+
+ul li{
+	font-size: 10px;
+}
+
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -62,6 +69,9 @@ label {
 		});
 		
 		$("#prepositionDDL").selectmenu();
+		$("#seperator1").attr("disabled", true);
+		$("#seperator2").attr("disabled", true);
+		$("#prepositionDDL").selectmenu("refresh");
 		
 		var sexthDeclarWords = ["acs","asins","ass","auss","avs","balss","brokastis","birzs","cilts","cēsis","dakts","debess","duris","durvis",
 				"dzelzs","govs","guns","haizivs","krāsns","krūtis","klints","kūts","klēts","kvīts","maksts","nakts","nots","nāss",
@@ -73,7 +83,7 @@ label {
 		var exchange = [["s", "š"], ["t", "š"], ["z", "ž"], ["d", "ž"], ["c", "č"], ["l", "ļ"], ["n", "ņ"], 
 							["p", "pj"], ["b", "bj"], ["m", "mj"], ["v", "vj"]];
 				
-		var questions = ["Kās?", "Kā?", "Kam?", "Ko?", "Kur?", "Kās?", "Kā?", "Kam?", "Ko?", "Kur?"];
+		var questions = ["Kas?", "Kā?", "Kam?", "Ko?", "Kur?", "Kas?", "Kā?", "Kam?", "Ko?", "Kur?"];
 		
 		var wordConjunction = {
 			decalre_1 : {
@@ -115,6 +125,16 @@ label {
 				singularLength: 1,
 				pluralLength: 2,
 				declarationList: ["s", "s", "ij", "i", "ī", "is", "*u", "īm", "is", "īs"]
+			},
+			decalre_am : {
+				singularLength: 3,
+				pluralLength: 2,
+				declarationList: ["ais", "ā", "ajam", "o", "ajā", "ie", "o", "ajiem", "os", "ajos"]
+			},
+			decalre_af : {
+				singularLength: 1,
+				pluralLength: 2,
+				declarationList: ["ā", "ās", "ajai", "o", "ajā", "ās", "o", "ajām", "ās", "ajās"]
 			}
 		}
 		
@@ -140,11 +160,41 @@ label {
 			return false;
 		}
 		
-		function returnDeclaration(word)
+		function returnDeclaration(word, isAdjective)
 		{
 			var wordLower = word.toLowerCase();
 			
-			var wordEnding = wordLower.substr(wordLower.length-4, wordLower.length);
+			var wordEnding = "";
+			
+			if(isAdjective)
+			{
+				wordEnding = wordLower.substr(wordLower.length-3, wordLower.length);
+				
+				if(wordEnding === "ais")
+				{
+					return "am_s";
+				}
+				
+				wordEnding = wordLower.substr(wordLower.length-2, wordLower.length);
+				
+				if(wordEnding === "ie")
+				{
+					return "am_p";
+				}
+				else if(wordEnding === "ās")
+				{
+					return "af_p";
+				}
+				
+				wordEnding = wordLower.substr(wordLower.length-1, wordLower.length);
+				
+				if(wordEnding === "ā")
+				{
+					return "af_s";
+				}
+			}
+			
+			wordEnding = wordLower.substr(wordLower.length-4, wordLower.length);
 			
 			//check words with ending pils like Daugavapils
 			if(wordEnding === "pils")
@@ -286,7 +336,7 @@ label {
 		$( "#wordConjunctionBtn" ).click( function( event ) {
 		      event.preventDefault();
 		    
-			var type = returnDeclaration($("#wordId")[0].value.trim());
+			var type = returnDeclaration($("#wordId")[0].value.trim(), false);
 			var wordConjunction = returnConjunction($("#wordId")[0].value.trim(), type)
 			
 			// delete all rows
@@ -301,33 +351,125 @@ label {
 			var cell = row.insertCell(0);
 			cell.innerHTML = "Vienskaitlis";
 			cell.colSpan = 2;
-			
+			cell = row.insertCell(1);
+			cell.innerHTML = "Daudzskaitlis";
+			cell.colSpan = 2;
+					
 			count++;
-			for(var i = 0; i < wordConjunction.length; i++)
+			for(var i = 0; i < wordConjunction.length / 2; i++)
 			{
 			
-				if(i == 5)
-				{
-					row = table.insertRow(count);
-					row.className = "header-style";
-					cell = row.insertCell(0);
-					cell.innerHTML = "Daudzskaitlis";
-					cell.colSpan = 2;
-					cell.className = "header-style";
-					count++;
-				}
-				
 				row = table.insertRow(count);
 				row.className = "row-style";
+					
 				cell = row.insertCell(0);
 				cell.innerHTML = questions[i];
 				
 				cell = row.insertCell(1);
 				cell.innerHTML = wordConjunction[i];
 				
+				
+				cell = row.insertCell(2);
+				cell.innerHTML = questions[i + 5];
+				
+				cell = row.insertCell(3);
+				cell.innerHTML = wordConjunction[i + 5];
+				
 				count++;
 			}
 		});
+		
+		$("#wordPrepositionBtn").click( function( event ) {
+		      event.preventDefault();
+			  
+			var type = returnDeclaration($("#wordPrepositionId")[0].value.trim(), false);
+			var wordConjunction = returnConjunction($("#wordPrepositionId")[0].value.trim(), type);
+			
+			var selectedText = $( "#prepositionDDL option:selected" )[0].text.split(" ")[0];
+			var selectedValue = $( "#prepositionDDL option:selected" )[0].value;
+			
+			var table = document.getElementById("tablePreposition");
+			while(table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+			
+			var splitType = type.split("_");
+			
+			if(splitType.length == 2)
+			{
+				var conjunctionWord = "";
+				
+				if(splitType[1] == "s")
+				{
+					if(selectedValue == "ka")
+						conjunctionWord = wordConjunction[1];
+					else if (selectedValue == "kam")
+						conjunctionWord = wordConjunction[2];
+					else
+						conjunctionWord = wordConjunction[3];
+				}
+				else
+					conjunctionWord = wordConjunction[7];
+				
+				var row = table.insertRow(0);
+				row.className = "row-style";
+					
+				var cell = row.insertCell(0);
+				cell.innerHTML = selectedText + " " + conjunctionWord;
+			}
+			
+		});
+		
+		$( "#wordAdjectiveBtn" ).click( function( event ) {
+		      event.preventDefault();
+		    
+			var type = returnDeclaration($("#adjectiveId")[0].value.trim(), true);
+			var wordAdjectiveConjunction = returnConjunction($("#adjectiveId")[0].value.trim(), type)
+			
+			type = returnDeclaration($("#wordAdjectiveId")[0].value.trim(), false);
+			var wordConjunction = returnConjunction($("#wordAdjectiveId")[0].value.trim(), type)
+			
+			
+			// delete all rows
+			var table = document.getElementById("tableAdjective");
+			while(table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+			
+			var count = 0;
+			var row = table.insertRow(count);
+			row.className = "header-style";
+			var cell = row.insertCell(0);
+			cell.innerHTML = "Vienskaitlis";
+			cell.colSpan = 2;
+			cell = row.insertCell(1);
+			cell.innerHTML = "Daudzskaitlis";
+			cell.colSpan = 2;
+					
+			count++;
+			for(var i = 0; i < wordConjunction.length / 2; i++)
+			{
+			
+				row = table.insertRow(count);
+				row.className = "row-style";
+					
+				cell = row.insertCell(0);
+				cell.innerHTML = questions[i];
+				
+				cell = row.insertCell(1);
+				cell.innerHTML = wordAdjectiveConjunction[i] + " " + wordConjunction[i];
+				
+				
+				cell = row.insertCell(2);
+				cell.innerHTML = questions[i + 5];
+				
+				cell = row.insertCell(3);
+				cell.innerHTML = wordAdjectiveConjunction[i + 5] + " " + wordConjunction[i + 5];
+				
+				count++;
+			}
+		});
+		
 	});
 </script>
 </head>
@@ -337,7 +479,7 @@ label {
 		<div class="wordConjunctionDiv">
 			<form action="#" id="wordConjunctionForm">
 				<fieldset>
-					<label for="wordId">Enter a word</label> 
+					<label for="wordId">Enter a word (Kas?)</label> 
 					<input type="text" id="wordId" name="wordName" />				
 						
 				</fieldset>
@@ -348,6 +490,32 @@ label {
 					
 			</form>
 		</div>
+		
+		<h3>Word with Adjective</h3>
+		<div class="wordAdjectiveDiv">
+			<form action="#" id="wordAdjectiveForm">
+				<fieldset>
+					<table border=0>
+						<tr>
+							<td><label for="adjectiveId">Enter an Adjective (Kas?)</label> </td>
+							<td><label for="wordAdjectiveId">Enter a word (Kas?)</label> </td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="adjectiveId" name="adjectiveName" />
+							</td>
+							<td><input type="text" id="wordAdjectiveId" name="wordAdjectiveName" /></td>
+						</tr>
+					</table>
+				</fieldset>
+					
+				<button class="ui-button ui-widget ui-corner-all" id="wordAdjectiveBtn">Show Conjunction</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tableAdjective"></table>
+					
+			</form>
+		</div>
+		
 		<h3>Word with Preposition</h3>
 		<div class="wordPrepositionDiv">
 			<form action="#" id="wordPrepositionForm">
@@ -355,13 +523,33 @@ label {
 					<table border=0>
 						<tr>
 							<td><label for="prepositionDDL">Choose a preposition</label> </td>
-							<td><label for="wordPrepositionId">Enter a word</label> </td>
+							<td><label for="wordPrepositionId">Enter a word (Kas?)</label> </td>
 						</tr>
 						<tr>
 							<td>
-								<select name="prepositionDDL" id="prepositionDDL">
-									<option value="0">Disconnected</option>
-									<option value="1">Connected</option>
+								<select name="prepositionDDL" id="prepositionDDL" style="font-size: 10px; width: 30px; height: 20px;">
+									<option value="ka" selected=true>Aiz</option>
+									<option value="ka">Bez</option>
+									<option value="ka">No</option>
+									<option value="ka">Pēc</option>
+									<option value="ka">Pirms</option>
+									<option value="ka">Uz (On)</option>
+									<option value="ka">Virs</option>
+									<option value="ka">Zem</option>
+									<option value="-" id="seperator1">--------</option>
+									<option value="kam">Līdz</option>
+									<option value="kam">Pa (By)</option>
+									<option value="-" id="seperator2">--------</option>
+									<option value="ko">Ap</option>
+									<option value="ko">Caur</option>
+									<option value="ko">Gar</option>
+									<option value="ko">Pa (Along)</option>
+									<option value="ko">Par</option>
+									<option value="ko">Pār</option>
+									<option value="ko">Pret</option>
+									<option value="ko">Strap</option>
+									<option value="ko">Uz (To)</option>
+									<option value="ko">Ar</option>
 								</select>
 							</td>
 							<td><input type="text" id="wordPrepositionId" name="wordPrepositionName" /></td>
@@ -375,8 +563,6 @@ label {
 					
 			</form>
 		</div>
-		<h3>Word with Adjective</h3>
-		<div></div>
 	</div>
 </body>
 </html>
