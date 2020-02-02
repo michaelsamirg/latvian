@@ -11,17 +11,17 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-table {
+.tableWord {
 	font-size: 1em;
 	padding: 2px;
 }
 
-table tr{
+.tableWord tr{
 	font-size: 1em;
 	padding: 5px;
 }
 
-table td{
+.tableWord td{
 	font-size: 1em;
 	padding: 7px;
 }
@@ -36,7 +36,7 @@ fieldset {
 
 label {
 	display: block;
-	margin: 30px 0 0 0;
+	margin: 5px 0 0 0;
 }
 
 .overflow {
@@ -57,6 +57,11 @@ ul li{
 	font-size: 10px;
 }
 
+
+.wordDiv {
+
+    padding: .5em .5em !important;
+}
 
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -476,7 +481,7 @@ ul li{
 <body>
 	<div id="accordion">
 		<h3>Word Conjunction</h3>
-		<div class="wordConjunctionDiv">
+		<div class="wordDiv">
 			<form action="#" id="wordConjunctionForm">
 				<fieldset>
 					<label for="wordId">Enter a word (Kas?)</label> 
@@ -486,13 +491,13 @@ ul li{
 					
 				<button class="ui-button ui-widget ui-corner-all" id="wordConjunctionBtn">Show Conjunction</button>
 				<br/><br/>
-				<table style='border-style: solid;' id="tableConjunction"></table>
+				<table style='border-style: solid;' id="tableConjunction" class="tableWord"></table>
 					
 			</form>
 		</div>
 		
 		<h3>Word with Adjective</h3>
-		<div class="wordAdjectiveDiv">
+		<div class="wordDiv">
 			<form action="#" id="wordAdjectiveForm">
 				<fieldset>
 					<table border=0>
@@ -511,13 +516,13 @@ ul li{
 					
 				<button class="ui-button ui-widget ui-corner-all" id="wordAdjectiveBtn">Show Conjunction</button>
 				<br/><br/>
-				<table style='border-style: solid;' id="tableAdjective"></table>
+				<table style='border-style: solid;' id="tableAdjective" class="tableWord"></table>
 					
 			</form>
 		</div>
 		
 		<h3>Word with Preposition</h3>
-		<div class="wordPrepositionDiv">
+		<div class="wordDiv">
 			<form action="#" id="wordPrepositionForm">
 				<fieldset>
 					<table border=0>
@@ -560,7 +565,7 @@ ul li{
 					
 				<button class="ui-button ui-widget ui-corner-all" id="wordPrepositionBtn">Show Conjunction</button>
 				<br/><br/>
-				<table style='border-style: solid;' id="tablePreposition"></table>
+				<table style='border-style: solid;' id="tablePreposition" class="tableWord"></table>
 					
 			</form>
 		</div>
