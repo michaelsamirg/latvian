@@ -338,17 +338,31 @@ ul li{
 			return wordConjunction;
 		}
 		
+		function checkNull(str)
+		{
+			if(str === undefined || str === null)
+				return true;
+				
+			if(str.trim().length == 0)
+				return true;
+				
+			return false;
+		}
+		
 		$( "#wordConjunctionBtn" ).click( function( event ) {
 		      event.preventDefault();
 		    
-			var type = returnDeclaration($("#wordId")[0].value.trim(), false);
-			var wordConjunction = returnConjunction($("#wordId")[0].value.trim(), type)
-			
 			// delete all rows
 			var table = document.getElementById("tableConjunction");
 			while(table.rows.length > 0) {
 				table.deleteRow(0);
 			}
+			
+			if(checkNull($("#wordId")[0].value))
+				return;
+			
+			var type = returnDeclaration($("#wordId")[0].value.trim(), false);
+			var wordConjunction = returnConjunction($("#wordId")[0].value.trim(), type)
 			
 			var count = 0;
 			var row = table.insertRow(count);
@@ -386,17 +400,20 @@ ul li{
 		
 		$("#wordPrepositionBtn").click( function( event ) {
 		      event.preventDefault();
-			  
+			 
+			var table = document.getElementById("tablePreposition");
+			while(table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+			
+			if(checkNull($("#wordPrepositionId")[0].value))
+				return;
+			 
 			var type = returnDeclaration($("#wordPrepositionId")[0].value.trim(), false);
 			var wordConjunction = returnConjunction($("#wordPrepositionId")[0].value.trim(), type);
 			
 			var selectedText = $( "#prepositionDDL option:selected" )[0].text.split(" ")[0];
 			var selectedValue = $( "#prepositionDDL option:selected" )[0].value;
-			
-			var table = document.getElementById("tablePreposition");
-			while(table.rows.length > 0) {
-				table.deleteRow(0);
-			}
 			
 			var splitType = type.split("_");
 			
@@ -428,18 +445,20 @@ ul li{
 		$( "#wordAdjectiveBtn" ).click( function( event ) {
 		      event.preventDefault();
 		    
-			var type = returnDeclaration($("#adjectiveId")[0].value.trim(), true);
-			var wordAdjectiveConjunction = returnConjunction($("#adjectiveId")[0].value.trim(), type)
-			
-			type = returnDeclaration($("#wordAdjectiveId")[0].value.trim(), false);
-			var wordConjunction = returnConjunction($("#wordAdjectiveId")[0].value.trim(), type)
-			
-			
 			// delete all rows
 			var table = document.getElementById("tableAdjective");
 			while(table.rows.length > 0) {
 				table.deleteRow(0);
 			}
+			
+			if(checkNull($("#adjectiveId")[0].value) || checkNull($("#wordAdjectiveId")[0].value))
+				return;
+			
+			var type = returnDeclaration($("#adjectiveId")[0].value.trim(), true);
+			var wordAdjectiveConjunction = returnConjunction($("#adjectiveId")[0].value.trim(), type)
+			
+			type = returnDeclaration($("#wordAdjectiveId")[0].value.trim(), false);
+			var wordConjunction = returnConjunction($("#wordAdjectiveId")[0].value.trim(), type)
 			
 			var count = 0;
 			var row = table.insertRow(count);
@@ -462,18 +481,26 @@ ul li{
 				cell.innerHTML = questions[i];
 				
 				cell = row.insertCell(1);
-				cell.innerHTML = wordAdjectiveConjunction[i] + " " + wordConjunction[i];
 				
+				if(wordAdjectiveConjunction[i] != "----" && wordConjunction[i] != "----")
+					cell.innerHTML = wordAdjectiveConjunction[i] + " " + wordConjunction[i];
+				else
+					cell.innerHTML = "----"
 				
 				cell = row.insertCell(2);
 				cell.innerHTML = questions[i + 5];
 				
 				cell = row.insertCell(3);
-				cell.innerHTML = wordAdjectiveConjunction[i + 5] + " " + wordConjunction[i + 5];
 				
+				if(wordAdjectiveConjunction[i + 5] != "----" && wordConjunction[i + 5] != "----")
+					cell.innerHTML = wordAdjectiveConjunction[i + 5] + " " + wordConjunction[i + 5];
+				else
+					cell.innerHTML = "----"
+					
 				count++;
 			}
 		});
+		
 		
 	});
 </script>
