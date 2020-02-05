@@ -70,7 +70,8 @@ ul li{
 	$(function() {
 
 		$( "#accordion" ).accordion({
-			heightStyle: "content"
+			heightStyle: "content",
+			collapsible: true
 		});
 		
 		$("#prepositionDDL").selectmenu();
@@ -501,6 +502,60 @@ ul li{
 			}
 		});
 		
+		$( "#wordComparativeBtn" ).click( function( event ) {
+		      event.preventDefault();
+		    
+			// delete all rows
+			var table = document.getElementById("tableComparative");
+			while(table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+			
+			if(checkNull($("#wordComparativeId")[0].value))
+				return;
+			
+			var endingLength = 0;
+			var endings = ["āks", "ākais"];
+			var wordLower = $("#wordComparativeId")[0].value.trim().toLowerCase();
+			var word = $("#wordComparativeId")[0].value.trim();
+			
+			if( wordLower.substr(wordLower.length-2, wordLower.length) === 'as')
+			{
+				 endingLength = 2;
+				 endings = ["ākas", "ākās"];
+			}
+			else if(wordLower.substr(wordLower.length-1, wordLower.length) === 'a')
+			{
+				endingLength = 1;
+				endings = ["āka", "ākā"];
+			}
+			else if(wordLower.substr(wordLower.length-1, wordLower.length) === 's')
+			{
+				endingLength = 1;
+				endings = ["āks", "ākais"];
+			}
+			else if(wordLower.substr(wordLower.length-1, wordLower.length) === 'i')
+			{
+				endingLength = 1;
+				endings = ["āki", "ākie"];
+			}
+			
+			var row = table.insertRow(0);
+			row.className = "header-style";
+			var cell = row.insertCell(0);
+			cell.innerHTML = "Labāk";
+			cell = row.insertCell(1);
+			cell.innerHTML = "Labākais";
+					
+			row = table.insertRow(1);
+			row.className = "row-style";
+				
+			cell = row.insertCell(0);
+			cell.innerHTML = word.substring(0, word.length - endingLength) + endings[0];
+			
+			cell = row.insertCell(1);
+			cell.innerHTML = "Vis" + wordLower.substring(0, wordLower.length - endingLength) + endings[1];
+		});
 		
 	});
 </script>
@@ -593,6 +648,22 @@ ul li{
 				<button class="ui-button ui-widget ui-corner-all" id="wordPrepositionBtn">Show Conjugation</button>
 				<br/><br/>
 				<table style='border-style: solid;' id="tablePreposition" class="tableWord"></table>
+					
+			</form>
+		</div>
+		
+		<h3>Comparative Forms</h3>
+		<div class="wordDiv">
+			<form action="#" id="wordComparativeForm">
+				<fieldset>
+					<label for="wordId">Enter an adjective (Kas?)</label> 
+					<input type="text" id="wordComparativeId" name="wordComparativeName" />				
+						
+				</fieldset>
+					
+				<button class="ui-button ui-widget ui-corner-all" id="wordComparativeBtn">Show Comparative Forms</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tableComparative" class="tableWord"></table>
 					
 			</form>
 		</div>
