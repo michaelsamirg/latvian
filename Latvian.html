@@ -74,9 +74,12 @@ ul li{
 			collapsible: true
 		});
 		
+		$( "#dateId" ).datepicker();
+		
 		$("#prepositionDDL").selectmenu();
 		$("#seperator1").attr("disabled", true);
 		$("#seperator2").attr("disabled", true);
+		$("#questionDDL").selectmenu();
 		$("#prepositionDDL").selectmenu("refresh");
 		
 		var sexthDeclarWords = ["acs","asins","ass","auss","avs","balss","brokastis","birzs","cilts","cēsis","dakts","debess","duris","durvis",
@@ -91,6 +94,105 @@ ul li{
 				
 		var questions = ["Kas?", "Kā?", "Kam?", "Ko?", "Kur?", "Kas?", "Kā?", "Kam?", "Ko?", "Kur?"];
 		
+		var numbers = {
+						"1": "Viens",
+						"2": "Divi",
+						"3": "Trīs",
+						"4": "Četri",
+						"5": "Pieci", 
+						"6": "Seši",
+						"7": "Septiņi",
+						"8": "Astoņi",
+						"9": "Deviņi",
+						"10": "Desmit",
+						"11": "Vienpadsmit",
+						"12": "Divpadsmit",
+						"13": "Trīspadsmit",
+						"14": "Četrpadsmit",
+						"15": "Piecpadsmit",
+						"16": "Sešpadsmit",
+						"17": "Septiņpadsmit",
+						"18": "Astoņpadsmit",
+						"19": "Deviņpadsmit",
+						"20": "Divdesmit",
+						"30": "Trīsdesmit",
+						"40": "Četrdesmit",
+						"50": "Piecdesmit",
+						"60": "Sešdesmit",
+						"70": "Septiņdesmit",
+						"80": "Astoņdesmit",
+						"90": "Deviņdesmit",
+						"100": "Simt",
+						"200": "Divsimt",
+						"300": "Trīssimt",
+						"400": "Četrsimt",
+						"500": "Piecsimt",
+						"600": "Sešsimt",
+						"700": "Spetiņsimt",
+						"800": "Astoņsimt",
+						"900": "Deiviņsimt",
+						"1000": "Tūkstoš",
+						"2000": "Divtūkstoš",
+						"3000": "Trīstūkstoš",
+						"4000": "Četrtūkstoš",
+						"5000": "Piectūkstoš",
+						"6000": "Seštūkstoš",
+						"7000": "Septiņtūkstoš",
+						"8000": "Astoņtūkstoš",
+						"9000": "Deviņtūkstoš"
+					};
+		
+		var numberOrdering = {
+						"1": "Pirmais",
+						"2": "Otrais",
+						"3": "Trešais",
+						"4": "Ceturtais",
+						"5": "Piektais", 
+						"6": "Sestais",
+						"7": "Septītais",
+						"8": "Astotais",
+						"9": "Devītais",
+						"10": "Desmitais",
+						"11": "Vienpadsmitais",
+						"12": "Divpadsmitais",
+						"13": "Trīspadsmitais",
+						"14": "Četrpadsmitais",
+						"15": "Piecpadsmitais",
+						"16": "Sešpadsmitais",
+						"17": "Septiņpadsmitais",
+						"18": "Astoņpadsmitais",
+						"19": "Deviņpadsmitais",
+						"20": "Divdesmitais",
+						"30": "Trīsdesmitais",
+						"40": "Četrdesmitais",
+						"50": "Piecdesmitais",
+						"60": "Sešdesmitais",
+						"70": "Septiņdesmitais",
+						"80": "Astoņdesmitais",
+						"90": "Deviņdesmitais",
+						"100": "Simtais",
+						"200": "Divsimtais",
+						"300": "Trīssimtais",
+						"400": "Četrsimtais",
+						"500": "Piecsimtais",
+						"600": "Sešsimtais",
+						"700": "Spetiņsimtais",
+						"800": "Astoņsimtais",
+						"900": "Deiviņsimtais",
+						"1000": "Tūkstošais",
+						"2000": "Divtūkstošais",
+						"3000": "Trīstūkstošais",
+						"4000": "Četrtūkstošais",
+						"5000": "Piectūkstošais",
+						"6000": "Seštūkstošais",
+						"7000": "Septiņtūkstošais",
+						"8000": "Astoņtūkstošais",
+						"9000": "Deviņtūkstošais",
+					};
+		
+		var months = ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", 
+						"Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"];
+						
 		var wordConjunction = {
 			decalre_1 : {
 				singularLength: 1,                                                   
@@ -276,7 +378,7 @@ ul li{
 				wordConjunctionList = changeEnding(word, declarationList, endingLength, isSinglare);
 			}
 			else
-				wordConjunctionList = [word, word, word, word, word, word, word, word, word, word]
+				wordConjunctionList = [word, word, word, word, word, word, word, word, word, word];
 			
 			//alert(wordConjunctionList);
 			return wordConjunctionList;
@@ -557,6 +659,165 @@ ul li{
 			cell.innerHTML = "Vis" + wordLower.substring(0, wordLower.length - endingLength) + endings[1];
 		});
 		
+		$( "#dateBtn" ).click( function( event ) {
+			 event.preventDefault();
+		    
+		
+			if($("#dateId")[0].value != null && $("#dateId")[0].value.trim().length > 0)
+			{
+				var date = new Date($("#dateId")[0].value);
+				
+				var fullYear = date.getFullYear();
+				var day = date.getDate();
+				var month = date.getMonth();
+				
+				//1- read year
+				var fullYearStr = fullYear+"";
+				var found = false;
+				var yearPronounce = "";
+				
+				var zeros = "";
+				
+				
+				for(var i = 0; i < 4- fullYearStr.length; i++)
+				{
+					zeros += "0";
+				}
+				
+				fullYearStr = zeros + fullYearStr;
+				
+				//read last 2 digits
+				if(parseInt(fullYearStr.substring(2,4)) > 0)
+				{
+					found = true;
+					//read from ordering
+					
+					if( numberOrdering[parseInt(fullYearStr.substring(2,4))] != null
+							&& numberOrdering[parseInt(fullYearStr.substring(2,4))].length > 0)
+					{
+						yearPronounce = numberOrdering[parseInt(fullYearStr.substring(2,4))].replace("ais", "ā");
+					}
+					else
+					{
+						var tensDigit = parseInt(fullYearStr.substring(2,3)) * 10;
+						var singleDigit = parseInt(fullYearStr.substring(3, 4));
+						
+						yearPronounce = numbers[tensDigit] + " " + numberOrdering[singleDigit].replace("ais", "ā");
+					}
+				}
+				
+				//read hundreds 
+				if(parseInt(fullYearStr.substring(1,2)) > 0)
+				{
+					var hundredsDigit = parseInt(fullYearStr.substring(1,2)) * 100;
+					if(found)
+					{
+						//read from numbers
+						yearPronounce = numbers[hundredsDigit] + " " + yearPronounce;
+					}
+					else
+					{
+						//read from ordering
+						yearPronounce = numberOrdering[hundredsDigit].replace("ais", "ā");
+					}
+					
+					found = true;
+				}
+				
+				
+				//read thousands
+				if(parseInt(fullYearStr.substring(0,1)) > 0)
+				{
+					var thousandsDigit = parseInt(fullYearStr.substring(0,1)) * 1000;
+					
+					if(found)
+					{
+						//read from numbers
+						yearPronounce = numbers[thousandsDigit] + " " + yearPronounce;
+					}
+					else
+					{
+						//read from ordering
+						yearPronounce = numberOrdering[thousandsDigit].replace("ais", "ā");
+					}
+				}
+				
+				
+				var question =$( "#questionDDL option:selected" )[0].value;
+				
+				var dayPronounc;
+				if( numberOrdering[day] != null
+						&& numberOrdering[day].length > 0)
+				{
+					if(question == "kas")
+						dayPronounc = numberOrdering[day];
+					else	
+					{
+						var dayConjunction = returnConjunction(numberOrdering[day], "am_s");
+						
+						if(dayConjunction != null && dayConjunction.length >=5)
+							dayPronounc = dayConjunction[4];
+						else
+							dayPronounc = numberOrdering[day];
+					}
+				}
+				else
+				{
+					var dayStr = day + "";
+					var tensDigit = parseInt(dayStr.substring(0,1)) * 10;
+					var singleDigit = parseInt(dayStr.substring(1, 2));
+					
+					
+					var singleDayPronounce = "";
+					
+					if(question == "kas")
+					{
+						singleDayPronounce = numberOrdering[singleDigit];
+					}
+					else
+					{
+						var dayConjunction = returnConjunction(numberOrdering[singleDigit], "am_s");
+						
+						if(dayConjunction != null && dayConjunction.length >=5)
+							singleDayPronounce = dayConjunction[4];
+						else
+							singleDayPronounce = numberOrdering[day];
+					}
+					
+					dayPronounc = numbers[tensDigit] + " " + singleDayPronounce;
+				}
+				
+				var monthPronounce = "";
+				
+				if(question == "kas")
+				{
+					monthPronounce = months[month];
+				}
+				else
+				{
+					var monthType = returnDeclaration(months[month], false);
+					var monthConjunction = returnConjunction(months[month], monthType);
+						
+					if(monthConjunction != null && monthConjunction.length >=5)
+						monthPronounce = monthConjunction[4];
+					else
+						monthPronounce = months[month];
+				}
+				
+				var table = document.getElementById("tableDate");
+				while(table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+				
+				var row = table.insertRow(0);
+				row.className = "row-style";
+					
+				var cell = row.insertCell(0);
+				cell.innerHTML = yearPronounce + " Gada," + dayPronounc + " " + monthPronounce;
+				
+			}
+		});
+		
 	});
 </script>
 </head>
@@ -667,6 +928,38 @@ ul li{
 					
 			</form>
 		</div>
+		
+		<h3>Date</h3>
+		<div class="wordDiv">
+			<form action="#" id="dateForm">
+				<fieldset>
+					<table border=0>
+						
+						<tr>
+							<td><label for="dateId">Choose a Date</label> </td>
+							<td><label for="questionDDL">Question?</label> </td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="dateId">	
+							</td>
+							<td>
+								<select name="questionDDL" id="questionDDL" style="font-size: 10px; width: 30px; height: 20px;">
+									<option value="kas" selected=true>Kas?</option>
+									<option value="kad">Kad?</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+				
+				<button class="ui-button ui-widget ui-corner-all" id="dateBtn">Show Full Date</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tableDate" class="tableWord"></table>
+					
+			</form>
+		</div>
+		
 	</div>
 </body>
 </html>
