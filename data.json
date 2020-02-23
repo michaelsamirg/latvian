@@ -1,0 +1,163 @@
+sexthDeclarWords = ["acs","asins","ass","auss","avs","balss","brokastis","birzs","cilts","cēsis","dakts","debess","duris","durvis",
+				"dzelzs","govs","guns","haizivs","krāsns","krūtis","klints","kūts","klēts","kvīts","maksts","nakts","nots","nāss",
+				"pils","pults","plīts","pirts","sirds","smiltis","šalts","tāss","telts","takts","uguns","uts",
+				"valsts","vantis","vēsts","zivs","zoss","ģints","ļaudis"];
+		
+exceptionsList = ["mēness", "akmens", "asmens", "rudens", "ūdens", "zibens", "sāls"];
+		
+exchange = [["s", "š"], ["t", "š"], ["z", "ž"], ["d", "ž"], ["c", "č"], ["l", "ļ"], ["n", "ņ"], 
+							["p", "pj"], ["b", "bj"], ["m", "mj"], ["v", "vj"]];
+				
+questions = ["Kas?", "Kā?", "Kam?", "Ko?", "Kur?", "Kas?", "Kā?", "Kam?", "Ko?", "Kur?"];
+		
+numbers = {
+			"1": "Viens",
+			"2": "Divi",
+			"3": "Trīs",
+			"4": "Četri",
+			"5": "Pieci", 
+			"6": "Seši",
+			"7": "Septiņi",
+			"8": "Astoņi",
+			"9": "Deviņi",
+			"10": "Desmit",
+			"11": "Vienpadsmit",
+			"12": "Divpadsmit",
+			"13": "Trīspadsmit",
+			"14": "Četrpadsmit",
+			"15": "Piecpadsmit",
+			"16": "Sešpadsmit",
+			"17": "Septiņpadsmit",
+			"18": "Astoņpadsmit",
+			"19": "Deviņpadsmit",
+			"20": "Divdesmit",
+			"30": "Trīsdesmit",
+			"40": "Četrdesmit",
+			"50": "Piecdesmit",
+			"60": "Sešdesmit",
+			"70": "Septiņdesmit",
+			"80": "Astoņdesmit",
+			"90": "Deviņdesmit",
+			"100": "Simt",
+			"200": "Divsimt",
+			"300": "Trīssimt",
+			"400": "Četrsimt",
+			"500": "Piecsimt",
+			"600": "Sešsimt",
+			"700": "Spetiņsimt",
+			"800": "Astoņsimt",
+			"900": "Deiviņsimt",
+			"1000": "Tūkstoš",
+			"2000": "Divtūkstoš",
+			"3000": "Trīstūkstoš",
+			"4000": "Četrtūkstoš",
+			"5000": "Piectūkstoš",
+			"6000": "Seštūkstoš",
+			"7000": "Septiņtūkstoš",
+			"8000": "Astoņtūkstoš",
+			"9000": "Deviņtūkstoš"
+};
+		
+numberOrdering = {
+			"1": "Pirmais",
+			"2": "Otrais",
+			"3": "Trešais",
+			"4": "Ceturtais",
+			"5": "Piektais", 
+			"6": "Sestais",
+			"7": "Septītais",
+			"8": "Astotais",
+			"9": "Devītais",
+			"10": "Desmitais",
+			"11": "Vienpadsmitais",
+			"12": "Divpadsmitais",
+			"13": "Trīspadsmitais",
+			"14": "Četrpadsmitais",
+			"15": "Piecpadsmitais",
+			"16": "Sešpadsmitais",
+			"17": "Septiņpadsmitais",
+			"18": "Astoņpadsmitais",
+			"19": "Deviņpadsmitais",
+			"20": "Divdesmitais",
+			"30": "Trīsdesmitais",
+			"40": "Četrdesmitais",
+			"50": "Piecdesmitais",
+			"60": "Sešdesmitais",
+			"70": "Septiņdesmitais",
+			"80": "Astoņdesmitais",
+			"90": "Deviņdesmitais",
+			"100": "Simtais",
+			"200": "Divsimtais",
+			"300": "Trīssimtais",
+			"400": "Četrsimtais",
+			"500": "Piecsimtais",
+			"600": "Sešsimtais",
+			"700": "Spetiņsimtais",
+			"800": "Astoņsimtais",
+			"900": "Deiviņsimtais",
+			"1000": "Tūkstošais",
+			"2000": "Divtūkstošais",
+			"3000": "Trīstūkstošais",
+			"4000": "Četrtūkstošais",
+			"5000": "Piectūkstošais",
+			"6000": "Seštūkstošais",
+			"7000": "Septiņtūkstošais",
+			"8000": "Astoņtūkstošais",
+			"9000": "Deviņtūkstošais",
+};
+		
+months = ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", 
+						"Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"];
+						
+wordConjunction = {
+	decalre_1 : {
+		singularLength: 1,                                                   
+		pluralLength: 1,
+		declarationList: ["s", "a", "am", "u", "ā", "i", "u", "iem", "us", "os"]
+	},
+	decalre_1E : {
+		singularLength: 1,
+		pluralLength: 1,
+		declarationList: ["s", "s", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+	},
+	decalre_2E : {
+		singularLength: 1,
+		pluralLength: 1,
+		declarationList: ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+	},
+	decalre_2 : {
+		singularLength: 2,
+		pluralLength: 1,
+		declarationList: ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+	},
+	decalre_3 : {
+		singularLength: 2,
+		pluralLength: 1,
+		declarationList: ["us", "us", "um", "u", "ū", "i", "u", "iem", "us", "os"]
+	},
+	decalre_4 : {
+		singularLength: 1,
+		pluralLength: 2,
+		declarationList: ["a", "as", "ai", "u", "ā", "as", "u", "ām", "as", "ās"]
+	},
+	decalre_5 : {
+		singularLength: 1,
+		pluralLength: 2,
+		declarationList: ["e", "es", "ei", "i", "ē", "es", "*u", "ēm", "es", "ēs"]
+	},
+	decalre_6 : {
+		singularLength: 1,
+		pluralLength: 2,
+		declarationList: ["s", "s", "ij", "i", "ī", "is", "*u", "īm", "is", "īs"]
+	},
+	decalre_am : {
+		singularLength: 3,
+		pluralLength: 2,
+		declarationList: ["ais", "ā", "ajam", "o", "ajā", "ie", "o", "ajiem", "os", "ajos"]
+	},
+	decalre_af : {
+		singularLength: 1,
+		pluralLength: 2,
+		declarationList: ["ā", "ās", "ajai", "o", "ajā", "ās", "o", "ajām", "ās", "ajās"]
+	}
+}

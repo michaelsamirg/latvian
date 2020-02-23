@@ -1,0 +1,55 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.tableWord {
+	font-size: 1em;
+	padding: 2px;
+}
+
+.tableWord tr{
+	font-size: 1em;
+	padding: 5px;
+}
+
+.tableWord td{
+	font-size: 1em;
+	padding: 7px;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+fieldset {
+	border: 0;
+}
+
+label {
+	display: block;
+	margin: 5px 0 0 0;
+}
+
+.overflow {
+	height: 200px;
+}
+
+.header-style{
+	background-color: #bfa52e;
+	text-align: center; 
+}
+
+.row-style{
+	background-color: #8faef2;
+}
+
+
+ul li{
+	font-size: 10px;
+}
+
+
+.wordDiv {
+
+    padding: .5em .5em !important;
+}
