@@ -10,7 +10,21 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript" src="data.json"></script>
+<script type="text/javascript" src="verbs.json"></script>
 <script type="text/javascript" src="script.js"></script>
+
+<!-- Scripts for verbs -->
+<script src="common.js" language="javascript" type="text/javascript"></script>
+<script src="formulas.js" language="javascript" type="text/javascript"></script>
+<script src="json.js" language="javascript" type="text/javascript"></script>
+<script src="obj.js" language="javascript" type="text/javascript"></script>
+<script src="events.js" language="javascript" type="text/javascript"></script>
+<script src="sorting.js" language="javascript" type="text/javascript"></script>
+
+<script src="konjugacija.js"></script>
+<script src="verbs.js"></script>
+<script src="markup.js"></script>
+
 <link rel="stylesheet" href="styles.css">
 
 </head>
@@ -153,6 +167,23 @@
 				<button class="ui-button ui-widget ui-corner-all" id="dateBtn">Show Full Date</button>
 				<br/><br/>
 				<table style='border-style: solid;' id="tableDate" class="tableWord"></table>
+					
+			</form>
+		</div>
+		
+		
+		<h3>Verb Conjugation</h3>
+		<div class="wordDiv">
+			<form action="#" id="verbConjunctionForm">
+				<fieldset>
+					<label for="wordId">Enter a verb (Infinitive)</label> 
+					<input type="text" id="verbId" name="verbName" autocomplete="off"/>				
+						
+				</fieldset>
+					
+				<button class="ui-button ui-widget ui-corner-all" id="verbConjunctionBtn">Show Conjugation</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tableVerbs" class="tableWord"></table>
 					
 			</form>
 		</div>

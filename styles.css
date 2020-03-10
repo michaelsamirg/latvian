@@ -53,3 +53,7 @@ ul li{
 
     padding: .5em .5em !important;
 }
+
+.formulaSakne { font-weight: 700; color: red; }
+
+.formulaPiedeklis { font-weight: 700; color: red; }

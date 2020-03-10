@@ -227,6 +227,39 @@ $(function() {
 			return false;
 		}
 		
+		// Verbs functions 
+		// load all verbs
+		var verbs;
+		function loadAllVerbsList() {
+
+			loadAllVerbs(returnVerbList, "shortlist");
+			
+		}
+		
+		function returnVerbList(verbsList)
+		{
+			verbs = verbsList;
+		}
+		
+		function findVerbJson(query)
+		{
+			var verbJson = "";
+			for (i = 0; i < verbs.length; i++) {
+                  
+                if (verbs[i].infinitivs === query) {
+                  
+				  console.log(verbs[i]);
+                  verbJson = verbs[i];
+                }
+            }
+			
+			return verbJson;
+		}
+		
+		
+		///
+		
+		
 		$( "#wordConjunctionBtn" ).click( function( event ) {
 		      event.preventDefault();
 		    
@@ -593,4 +626,123 @@ $(function() {
 			}
 		});
 		
+		$( "#verbConjunctionBtn" ).click( function( event ) {
+			event.preventDefault();
+		    
+			var table = document.getElementById("tableVerbs");
+			while(table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+			
+			if(checkNull($("#verbId")[0].value))
+				return;
+			
+			var verb = $("#verbId")[0].value;
+			
+			var verbJson = findVerbJson(verb.toLowerCase());
+			
+			if(verbJson == null || (verbJson != null && verbJson.length > 0))
+			{
+				alert("Verb not found");
+				return;
+			}
+				
+			var tabula = konjugat(verbJson);
+			
+			if(tabula != null && tabula.length == 6)
+			{
+				var row = table.insertRow(0);
+				row.className = "header-style";
+				var cell = row.insertCell(0);
+				cell.innerHTML = "";
+				cell = row.insertCell(1);
+				cell.innerHTML = "Pagātne";
+				cell = row.insertCell(2);
+				cell.innerHTML = "Tagadne";
+				cell = row.insertCell(3);
+				cell.innerHTML = "Nākotne";
+				
+				// Es
+				row = table.insertRow(1);
+				cell = row.insertCell(0);
+				cell.className = "header-style";
+				cell.innerHTML = "Es";
+				cell = row.insertCell(1);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[1][0];
+				cell = row.insertCell(2);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[1][1];
+				cell = row.insertCell(3);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[1][2];
+				
+				// Tu
+				row = table.insertRow(2);
+				cell = row.insertCell(0);
+				cell.className = "header-style";
+				cell.innerHTML = "Tu";
+				cell = row.insertCell(1);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[2][0];
+				cell = row.insertCell(2);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[2][1];
+				cell = row.insertCell(3);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[2][2];
+				
+				// Viņš
+				row = table.insertRow(3);
+				cell = row.insertCell(0);
+				cell.className = "header-style";
+				cell.innerHTML = "Viņš";
+				cell = row.insertCell(1);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[3][0];
+				cell = row.insertCell(2);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[3][1];
+				cell = row.insertCell(3);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[3][2];
+				
+				// Mēs
+				row = table.insertRow(4);
+				cell = row.insertCell(0);
+				cell.className = "header-style";
+				cell.innerHTML = "Mēs";
+				cell = row.insertCell(1);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[4][0];
+				cell = row.insertCell(2);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[4][1];
+				cell = row.insertCell(3);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[4][2];
+				
+				// Jūs
+				row = table.insertRow(5);
+				cell = row.insertCell(0);
+				cell.className = "header-style";
+				cell.innerHTML = "Jūs";
+				cell = row.insertCell(1);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[5][0];
+				cell = row.insertCell(2);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[5][1];
+				cell = row.insertCell(3);
+				cell.className = "row-style";
+				cell.innerHTML =  tabula[5][2];
+			}
+			else
+				alert("Verb not found");
+		
+		});
+		
+		 $(document).ready(function() {
+			loadAllVerbsList();
+		 });
 	});
