@@ -639,7 +639,7 @@ $(function() {
 			
 			var verb = $("#verbId")[0].value;
 			
-			var verbJson = findVerbJson(verb.toLowerCase());
+			var verbJson = findVerbJson(verb.toLowerCase().trim());
 			
 			if(verbJson == null || (verbJson != null && verbJson.length > 0))
 			{
@@ -656,9 +656,9 @@ $(function() {
 				var cell = row.insertCell(0);
 				cell.innerHTML = "";
 				cell = row.insertCell(1);
-				cell.innerHTML = "Pagātne";
-				cell = row.insertCell(2);
 				cell.innerHTML = "Tagadne";
+				cell = row.insertCell(2);
+				cell.innerHTML = "Pagātne";
 				cell = row.insertCell(3);
 				cell.innerHTML = "Nākotne";
 				
@@ -669,10 +669,10 @@ $(function() {
 				cell.innerHTML = "Es";
 				cell = row.insertCell(1);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[1][0];
+				cell.innerHTML =  tabula[1][1];
 				cell = row.insertCell(2);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[1][1];
+				cell.innerHTML =  tabula[1][0];
 				cell = row.insertCell(3);
 				cell.className = "row-style";
 				cell.innerHTML =  tabula[1][2];
@@ -684,10 +684,10 @@ $(function() {
 				cell.innerHTML = "Tu";
 				cell = row.insertCell(1);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[2][0];
+				cell.innerHTML =  tabula[2][1];
 				cell = row.insertCell(2);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[2][1];
+				cell.innerHTML =  tabula[2][0];
 				cell = row.insertCell(3);
 				cell.className = "row-style";
 				cell.innerHTML =  tabula[2][2];
@@ -699,10 +699,10 @@ $(function() {
 				cell.innerHTML = "Viņš";
 				cell = row.insertCell(1);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[3][0];
+				cell.innerHTML =  tabula[3][1];
 				cell = row.insertCell(2);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[3][1];
+				cell.innerHTML =  tabula[3][0];
 				cell = row.insertCell(3);
 				cell.className = "row-style";
 				cell.innerHTML =  tabula[3][2];
@@ -714,10 +714,10 @@ $(function() {
 				cell.innerHTML = "Mēs";
 				cell = row.insertCell(1);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[4][0];
+				cell.innerHTML =  tabula[4][1];
 				cell = row.insertCell(2);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[4][1];
+				cell.innerHTML =  tabula[4][0];
 				cell = row.insertCell(3);
 				cell.className = "row-style";
 				cell.innerHTML =  tabula[4][2];
@@ -729,10 +729,10 @@ $(function() {
 				cell.innerHTML = "Jūs";
 				cell = row.insertCell(1);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[5][0];
+				cell.innerHTML =  tabula[5][1];
 				cell = row.insertCell(2);
 				cell.className = "row-style";
-				cell.innerHTML =  tabula[5][1];
+				cell.innerHTML =  tabula[5][0];
 				cell = row.insertCell(3);
 				cell.className = "row-style";
 				cell.innerHTML =  tabula[5][2];
