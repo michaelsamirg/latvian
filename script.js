@@ -453,18 +453,23 @@ $(function() {
 			var row = table.insertRow(0);
 			row.className = "header-style";
 			var cell = row.insertCell(0);
-			cell.innerHTML = "Labāk";
+			cell.innerHTML = "Pamata pakāpe"
 			cell = row.insertCell(1);
-			cell.innerHTML = "Labākais";
+			cell.innerHTML = "Pārākā pakāpe";
+			cell = row.insertCell(2);
+			cell.innerHTML = "Vispārākā pakāpe";
 					
 			row = table.insertRow(1);
 			row.className = "row-style";
-				
+			
 			cell = row.insertCell(0);
-			cell.innerHTML = word.substring(0, word.length - endingLength) + endings[0];
+			cell.innerHTML = wordLower;
 			
 			cell = row.insertCell(1);
-			cell.innerHTML = "Vis" + wordLower.substring(0, wordLower.length - endingLength) + endings[1];
+			cell.innerHTML = wordLower.substring(0, wordLower.length - endingLength) + endings[0];
+			
+			cell = row.insertCell(2);
+			cell.innerHTML = "(vis)" + wordLower.substring(0, wordLower.length - endingLength) + endings[1];
 		});
 		
 		$( "#dateBtn" ).click( function( event ) {
