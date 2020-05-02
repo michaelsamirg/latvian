@@ -13,13 +13,10 @@ $(function() {
 			}
 		);
 		
-		$("#prepositionDDL").selectmenu();
 		$("#seperator1").attr("disabled", true);
 		$("#seperator2").attr("disabled", true);
-		$("#questionDDL").selectmenu();
-		$("#prepositionDDL").selectmenu("refresh");
-		
-		
+		$("#prepositionDDL").attr("disabled", true);
+		$("#preposotionCkhId").attr("checked", false);
 		
 		function checkSixthWords(wordToCheck)
 		{
@@ -49,8 +46,8 @@ $(function() {
 			
 			var wordEnding = "";
 			
-			if(isAdjective)
-			{
+			//if(isAdjective)
+			//{
 				wordEnding = wordLower.substr(wordLower.length-3, wordLower.length);
 				
 				if(wordEnding === "ais")
@@ -75,7 +72,7 @@ $(function() {
 				{
 					return "af_s";
 				}
-			}
+			//}
 			
 			wordEnding = wordLower.substr(wordLower.length-4, wordLower.length);
 			
@@ -272,8 +269,76 @@ $(function() {
 			if(checkNull($("#wordId")[0].value))
 				return;
 			
-			var type = returnDeclaration($("#wordId")[0].value.trim(), false);
-			var wordConjunction = returnConjunction($("#wordId")[0].value.trim(), type)
+			var wordList = $("#wordId")[0].value.split(" ");
+			var word1 = wordList.length >= 1 ? wordList[0] : "";
+			var word2 = wordList.length >= 2 ? wordList[1] : "";
+			
+			if(checkNull(word1))
+				return;
+			
+			var type = returnDeclaration(word1, false);
+			var wordConjunction = returnConjunction(word1, type);
+			
+			var word2Conjunction = null;
+			
+			if(!checkNull(word2))
+			{
+				type = returnDeclaration(word2, false);
+				word2Conjunction = returnConjunction(word2, type);
+			}
+			
+			if($("#preposotionCkhId")[0].checked)
+			{
+				var selectedText = $( "#prepositionDDL option:selected" )[0].text.split(" ")[0];
+				var selectedValue = $( "#prepositionDDL option:selected" )[0].value;
+				
+				var splitType = type.split("_");
+				
+				if(splitType.length == 2)
+				{
+					var conjunctionWord = "";
+					
+					if(splitType[1] == "s")
+					{
+						if(selectedValue == "ka")
+						{
+							if(!checkNull(word2) && word2Conjunction != null && word2Conjunction.length > 0)
+								conjunctionWord = wordConjunction[1] + " " + word2Conjunction[1];
+							else
+								conjunctionWord = wordConjunction[1];
+						}
+						else if (selectedValue == "kam")
+						{
+							if(!checkNull(word2) && word2Conjunction != null && word2Conjunction.length > 0)
+								conjunctionWord = wordConjunction[2] + " " + word2Conjunction[2];
+							else
+								conjunctionWord = wordConjunction[2];
+						}
+						else
+						{
+							if(!checkNull(word2) && word2Conjunction != null && word2Conjunction.length > 0)
+								conjunctionWord = wordConjunction[3] + " " + word2Conjunction[3];
+							else
+								conjunctionWord = wordConjunction[3];
+						}
+					}
+					else
+					{
+						if(!checkNull(word2) && word2Conjunction != null && word2Conjunction.length > 0)
+								conjunctionWord = wordConjunction[7] + " " + word2Conjunction[7];
+							else
+								conjunctionWord = wordConjunction[7];
+					}
+					
+					var row = table.insertRow(0);
+					row.className = "row-style";
+						
+					var cell = row.insertCell(0);
+					cell.innerHTML = selectedText + " " + conjunctionWord;
+					
+				}
+				return;
+			}
 			
 			var count = 0;
 			var row = table.insertRow(count);
@@ -296,17 +361,49 @@ $(function() {
 				cell.innerHTML = questions[i];
 				
 				cell = row.insertCell(1);
-				cell.innerHTML = wordConjunction[i];
 				
+				
+				if(!checkNull(word2) && word2Conjunction != null && word2Conjunction.length > 0)
+				{
+					if(word2Conjunction[i] != "----")
+						cell.innerHTML = wordConjunction[i] + " " + word2Conjunction[i];
+					else
+						cell.innerHTML = "----";
+				}
+				else
+				{
+					cell.innerHTML = wordConjunction[i];
+				}
+					
 				
 				cell = row.insertCell(2);
 				cell.innerHTML = questions[i + 5];
 				
 				cell = row.insertCell(3);
-				cell.innerHTML = wordConjunction[i + 5];
+				
+				if(!checkNull(word2) && word2Conjunction != null && word2Conjunction.length > 0)
+				{
+					if(word2Conjunction[i+5] != "----")
+						cell.innerHTML = wordConjunction[i+5] + " " + word2Conjunction[i+5];
+					else
+						cell.innerHTML = "----";
+				}
+				else
+				{
+					cell.innerHTML = wordConjunction[i+5];
+				}
 				
 				count++;
 			}
+		});
+		
+		$('#preposotionCkhId').change( function (event) {
+			var checked = $("#preposotionCkhId")[0].checked;
+			
+			if(checked)
+				$("#prepositionDDL")[0].disabled = false;
+			else
+				$("#prepositionDDL")[0].disabled = true;
 		});
 		
 		$("#wordPrepositionBtn").click( function( event ) {
@@ -366,10 +463,10 @@ $(function() {
 				return;
 			
 			var type = returnDeclaration($("#adjectiveId")[0].value.trim(), true);
-			var wordAdjectiveConjunction = returnConjunction($("#adjectiveId")[0].value.trim(), type)
+			var wordAdjectiveConjunction = returnConjunction($("#adjectiveId")[0].value.trim(), type);
 			
 			type = returnDeclaration($("#wordAdjectiveId")[0].value.trim(), false);
-			var wordConjunction = returnConjunction($("#wordAdjectiveId")[0].value.trim(), type)
+			var wordConjunction = returnConjunction($("#wordAdjectiveId")[0].value.trim(), type);
 			
 			var count = 0;
 			var row = table.insertRow(count);
@@ -449,6 +546,8 @@ $(function() {
 				endingLength = 1;
 				endings = ["āki", "ākie"];
 			}
+			else
+				return;
 			
 			var row = table.insertRow(0);
 			row.className = "header-style";

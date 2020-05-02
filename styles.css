@@ -57,3 +57,5 @@ ul li{
 .formulaSakne { font-weight: 700; color: red; }
 
 .formulaPiedeklis { font-weight: 700; color: red; }
+
+.word-hint {font-size: 10px; font-style: italic;}

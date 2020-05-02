@@ -22,8 +22,37 @@
 		<div class="wordDiv">
 			<form action="#" id="wordConjunctionForm">
 				<fieldset>
-					<label for="wordId">Enter a word (Kas?)</label> 
-					<input type="text" id="wordId" name="wordName" autocomplete="off"/>				
+					<label class="word-hint">Tick check-box to show words with selected preposition</label>
+					<input type="checkbox" id="preposotionCkhId">Preposotion</input>
+					<select name="prepositionDDL" id="prepositionDDL" style="width: 120px; height: 30px; margin-bottom:10px;" disabled>
+						<option value="ka" selected=true>Aiz</option>
+						<option value="ka">Bez</option>
+						<option value="ka">No</option>
+						<option value="ka">Pēc</option>
+						<option value="ka">Pie</option>
+						<option value="ka">Pirms</option>
+						<option value="ka">Uz (On)</option>
+						<option value="ka">Virs</option>
+						<option value="ka">Zem</option>
+						<option value="-" id="seperator1">--------</option>
+						<option value="kam">Līdz</option>
+						<option value="kam">Pa (By)</option>
+						<option value="-" id="seperator2">--------</option>
+						<option value="ko">Ap</option>
+						<option value="ko">Caur</option>
+						<option value="ko">Gar</option>
+						<option value="ko">Pa (Along)</option>
+						<option value="ko">Par</option>
+						<option value="ko">Pār</option>
+						<option value="ko">Pret</option>
+						<option value="ko">Strap</option>
+						<option value="ko">Uz (To)</option>
+						<option value="ko">Ar</option>
+					</select> 
+					
+					
+					<label for="wordHintId" class="word-hint">Question Kas? Maximum 2 words with space (i.e. Skapis, Labs Skapis, Labais Skapis, etc..)</label>
+					<input type="text" id="wordId" name="wordName" autocomplete="off" placeholder="Enter word(s)"/>	
 						
 				</fieldset>
 					
@@ -34,7 +63,7 @@
 			</form>
 		</div>
 		
-		<h3>Word with Adjective</h3>
+		<!--<h3>Word with Adjective</h3>
 		<div class="wordDiv">
 			<form action="#" id="wordAdjectiveForm">
 				<fieldset>
@@ -57,9 +86,9 @@
 				<table style='border-style: solid;' id="tableAdjective" class="tableWord"></table>
 					
 			</form>
-		</div>
+		</div>-->
 		
-		<h3>Word with Preposition</h3>
+		<!--<h3>Word with Preposition</h3>
 		<div class="wordDiv">
 			<form action="#" id="wordPrepositionForm">
 				<fieldset>
@@ -69,7 +98,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select name="prepositionDDL" id="prepositionDDL" style="font-size: 10px; width: 30px; height: 20px;">
+								<select name="prepositionDDL" id="prepositionDDL" style="width: 120px; height: 30px;">
 									<option value="ka" selected=true>Aiz</option>
 									<option value="ka">Bez</option>
 									<option value="ka">No</option>
@@ -107,13 +136,14 @@
 				<table style='border-style: solid;' id="tablePreposition" class="tableWord"></table>
 					
 			</form>
-		</div>
+		</div>-->
 		
 		<h3>Comparative Forms</h3>
 		<div class="wordDiv">
 			<form action="#" id="wordComparativeForm">
 				<fieldset>
 					<label for="wordId">Enter an adjective (Kas?)</label> 
+					<label for="wordHintId" class="word-hint">Question Kas? (i.e. Labs, Labi, Laba, Labas etc..)</label>
 					<input type="text" id="wordComparativeId" name="wordComparativeName" autocomplete="off"/>				
 						
 				</fieldset>
@@ -144,7 +174,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select name="questionDDL" id="questionDDL" style="font-size: 10px; width: 30px; height: 20px;">
+								<select name="questionDDL" id="questionDDL" style="width: 120px; height: 30px;">
 									<option value="kas" selected=true>Kas?</option>
 									<option value="kad">Kad?</option>
 								</select>
@@ -165,7 +195,7 @@
 		<div class="wordDiv">
 			<form action="#" id="verbConjunctionForm">
 				<fieldset>
-					<label for="wordId">Enter a verb (Infinitive)</label> 
+					<label for="wordId">Enter a verb (Infinitive form)</label> 
 					<input type="text" id="verbId" name="verbName" autocomplete="off"/>				
 						
 				</fieldset>
