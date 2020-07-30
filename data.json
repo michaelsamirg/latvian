@@ -1,10 +1,10 @@
 sexthDeclarWords = ["acs","asins","ass","auss","avs","balss","brokastis","birzs","cilts","cēsis","dakts","debess","duris","durvis",
-				"dzelzs","govs","guns","haizivs","krāsns","krūtis","klints","kūts","klēts","kvīts","maksts","nakts","nots","nāss",
+				"dzelzs","govs","guns","haizivs","krāsns","krūtis","klints","kūts","klēts","kvīts","maksts","nakts", "pusnakts", "nots","nāss",
 				"pils","pults","plīts","pirts","sirds","smiltis","šalts","tāss","telts","takts","uguns","uts",
 				"valsts","vantis","vēsts","zivs","zoss","ģints","ļaudis","acis","asinis","ausis","avis","balsis","birzis","ciltis",
-				"daktis","debesis","dzelzis","govis","gunis","krāsnis","klintis","kūtis","klētis","kvītis","makstis","naktis","notis","nāsis",
-				"pilis","pultis","plītis","pirtis","sirdis","šaltis","tāsis","teltis","taktis","ugunis","utis",	"valstis","vēstis",
-				"zivis","zosis","ģintis"];
+				"daktis","debesis","dzelzis","govis","gunis","krāsnis","klintis","kūtis","klētis","kvītis","makstis","naktis", "pusnaktis", 
+				"notis","nāsis", "pilis","pultis","plītis","pirtis","sirdis","šaltis","tāsis","teltis","taktis","ugunis","utis",	
+				"valstis","vēstis", "zivis","zosis","ģintis"];
 		
 exceptionsList = ["mēness", "akmens", "asmens", "rudens", "ūdens", "zibens", "sāls"];
 		
@@ -12,6 +12,36 @@ exchange = [["s", "š"], ["t", "š"], ["z", "ž"], ["d", "ž"], ["c", "č"], ["l
 							["p", "pj"], ["b", "bj"], ["m", "mj"], ["v", "vj"]];
 				
 questions = ["Kas?", "Kā?", "Kam?", "Ko?", "Kur?", "Kas?", "Kā?", "Kam?", "Ko?", "Kur?"];
+
+exceptionsConjugationListGenderKnown = { 
+									"pats" : {"data": ["pats", "paša", "pašam", "pašu", "pašā", "paši", "pašu", "pašiem", "pašus", "pašos"], 
+												"declaration": "em_s"},
+									"pati" : {"data": ["pati", "pašas", "pašai", "pašu", "pašā", "pašas", "pašu", "pašām", "pašas", "pašās"],
+												"declaration": "ef_s"},
+									"paši" : {"data" : ["----", "----", "----", "----", "----", "paši", "pašu", "pašiem", "pašus", "pašos"],
+												"declaration": "em_p"},
+									"pašas" : { "data" : ["----", "----", "----", "----", "----", "pašas", "pašu", "pašām", "pašas", "pašās"],
+												"declaration": "ef_p"},
+									"tas" : {"data" : ["tas", "tā", "tam", "to", "tajā", "tie", "to", "tiem", "tos", "tajos"],
+												"declaration": "em_s"},
+									"tā" : {"data": ["tā", "tās", "tai", "to", "tajā", "tās", "to", "tām", "tās", "tajās"],
+												"declaration": "ef_s"},
+									"tie" : {"data" : ["----", "----", "----", "----", "----", "tie", "to", "tiem", "tos", "tajos"],
+												"declaration": "em_p"},
+									"tās" : {"data" : ["----", "----", "----", "----", "----", "tās", "to", "tām", "tās", "tajās"],
+												"declaration": "ef_p"},
+									"šis": { "data" : ["šis", "šā", "šim", "šo", "šajā", "šie", "šo", "šiem", "šos", "šajos"],
+												"declaration": "em_s"},
+									"šī": {"data" : ["šī", "šās", "šai", "šo", "šajā", "šīs", "šo", "šīm", "šīs", "šajās"],
+												"declaration": "ef_s"},
+									"šie": {"data" : ["----", "----", "----", "----", "----", "šie", "šo", "šiem", "šos", "šajos"],
+												"declaration": "em_p"},
+									"šīs": {"data" : ["----", "----", "----", "----", "----", "šīs", "šo", "šīm", "šīs", "šajās"],
+												"declaration": "ef_p"}
+								};
+
+exceptionsConjugationListUnknown = {"trīs" : {"m_data" : ["----", "----", "----", "----", "----", "Trīs", "Triju", "Trijiem", "Trīs", "Trijos"] ,
+											  "f_data" : ["----", "----", "----", "----", "----", "Trīs", "Triju", "Trijām", "Trīs", "Trijās"]}};
 		
 numbers = {
 			"1": "Viens",
@@ -113,54 +143,54 @@ months = ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "J
 						"Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"];
 						
 wordConjunction = {
-	decalre_1 : {
-		singularLength: 1,                                                   
-		pluralLength: 1,
-		declarationList: ["s", "a", "am", "u", "ā", "i", "u", "iem", "us", "os"]
+	"decalre_1" : {
+		"singularLength": 1,                                                   
+		"pluralLength": 1,
+		"declarationList": ["s", "a", "am", "u", "ā", "i", "u", "iem", "us", "os"]
 	},
-	decalre_1E : {
-		singularLength: 1,
-		pluralLength: 1,
-		declarationList: ["s", "s", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+	"decalre_1E" : {
+		"singularLength": 1,
+		"pluralLength": 1,
+		"declarationList": ["s", "s", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
 	},
-	decalre_2E : {
-		singularLength: 1,
-		pluralLength: 1,
-		declarationList: ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+	"decalre_2E" : {
+		"singularLength": 1,
+		"pluralLength": 1,
+		"declarationList": ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
 	},
-	decalre_2 : {
-		singularLength: 2,
-		pluralLength: 1,
-		declarationList: ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
+	"decalre_2" : {
+		"singularLength": 2,
+		"pluralLength": 1,
+		"declarationList": ["is", "*a", "im", "i", "ī", "*i", "*u", "*iem", "*us", "*os"]
 	},
-	decalre_3 : {
-		singularLength: 2,
-		pluralLength: 1,
-		declarationList: ["us", "us", "um", "u", "ū", "i", "u", "iem", "us", "os"]
+	"decalre_3" : {
+		"singularLength": 2,
+		"pluralLength": 1,
+		"declarationList": ["us", "us", "um", "u", "ū", "i", "u", "iem", "us", "os"]
 	},
-	decalre_4 : {
-		singularLength: 1,
-		pluralLength: 2,
-		declarationList: ["a", "as", "ai", "u", "ā", "as", "u", "ām", "as", "ās"]
+	"decalre_4" : {
+		"singularLength": 1,
+		"pluralLength": 2,
+		"declarationList": ["a", "as", "ai", "u", "ā", "as", "u", "ām", "as", "ās"]
 	},
-	decalre_5 : {
-		singularLength: 1,
-		pluralLength: 2,
-		declarationList: ["e", "es", "ei", "i", "ē", "es", "*u", "ēm", "es", "ēs"]
+	"decalre_5" : {
+		"singularLength": 1,
+		"pluralLength": 2,
+		"declarationList": ["e", "es", "ei", "i", "ē", "es", "*u", "ēm", "es", "ēs"]
 	},
-	decalre_6 : {
-		singularLength: 1,
-		pluralLength: 2,
-		declarationList: ["s", "s", "ij", "i", "ī", "is", "*u", "īm", "is", "īs"]
+	"decalre_6" : {
+		"singularLength": 1,
+		"pluralLength": 2,
+		"declarationList": ["s", "s", "ij", "i", "ī", "is", "*u", "īm", "is", "īs"]
 	},
-	decalre_am : {
-		singularLength: 3,
-		pluralLength: 2,
-		declarationList: ["ais", "ā", "ajam", "o", "ajā", "ie", "o", "ajiem", "os", "ajos"]
+	"decalre_am" : {
+		"singularLength": 3,
+		"pluralLength": 2,
+		"declarationList": ["ais", "ā", "ajam", "o", "ajā", "ie", "o", "ajiem", "os", "ajos"]
 	},
-	decalre_af : {
-		singularLength: 1,
-		pluralLength: 2,
-		declarationList: ["ā", "ās", "ajai", "o", "ajā", "ās", "o", "ajām", "ās", "ajās"]
+	"decalre_af" : {
+		"singularLength": 1,
+		"pluralLength": 2,
+		"declarationList": ["ā", "ās", "ajai", "o", "ajā", "ās", "o", "ajām", "ās", "ajās"]
 	}
 }

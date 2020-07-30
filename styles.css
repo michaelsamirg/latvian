@@ -59,3 +59,19 @@ ul li{
 .formulaPiedeklis { font-weight: 700; color: red; }
 
 .word-hint {font-size: 10px; font-style: italic;}
+
+.nounVerb {
+	font-size: 1em;
+	padding: 2px;
+	background-color: #8faef2;
+	width: 200px;
+	border: 1px solid;
+	border-color: #0c2068;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;   /* prevent horizontal scrollbar */
+    overflow-x: hidden; /* add padding to account for vertical scrollbar */
+    z-index:1000 !important;
+}

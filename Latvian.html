@@ -8,12 +8,14 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="mdtimepicker.min.js"></script>
 
 <script type="text/javascript" src="data.json"></script>
 <script type="text/javascript" src="verbs.json"></script>
-<script type="text/javascript" src="compressed.js"></script>
-
 <!--
+<script type="text/javascript" src="compressed.js"></script>
+-->
+
 <script type="text/javascript" src="script.js"></script>
 
 <script src="common.js" language="javascript" type="text/javascript"></script>
@@ -25,9 +27,11 @@
 
 <script src="konjugacija.js"></script>
 <script src="verbs.js"></script>
-<script src="markup.js"></script>  -->
+<script src="markup.js"></script>  
 
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="mdtimepicker.min.css"/>
+<link rel="stylesheet" href="mdtimepicker-theme.css"/>
 
 </head>
 <body>
@@ -156,7 +160,7 @@
 		<div class="wordDiv">
 			<form action="#" id="wordComparativeForm">
 				<fieldset>
-					<label for="wordId">Enter an adjective (Kas?)</label> 
+					<label for="wordComparativeId">Enter an adjective (Kas?)</label> 
 					<label for="wordHintId" class="word-hint">Question Kas? (i.e. Labs, Labi, Laba, Labas etc..)</label>
 					<input type="text" id="wordComparativeId" name="wordComparativeName" autocomplete="off"/>				
 						
@@ -204,6 +208,30 @@
 			</form>
 		</div>
 		
+		<h3>Time</h3>
+		<div class="wordDiv">
+			<form action="#" id="timeForm">
+				<fieldset>
+					<table border=0>
+						
+						<tr>
+							<td><label for="timeId">Choose time</label> </td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="timeId" autocomplete="off">	
+							</td>
+						</tr>
+						
+					</table>
+				</fieldset>
+				
+				<button class="ui-button ui-widget ui-corner-all" id="timeBtn">Show Full Time</button>
+				<br/><br/>
+				<table style='border-style: solid;' id="tableTime" class="tableWord"></table>
+					
+			</form>
+		</div>
 		
 		<h3>Verb Conjugation</h3>
 		<div class="wordDiv">
@@ -211,13 +239,16 @@
 				<fieldset>
 					<label for="wordId">Enter a verb (Infinitive form)</label> 
 					<input type="text" id="verbId" name="verbName" autocomplete="off"/>				
-						
+					
 				</fieldset>
 					
 				<button class="ui-button ui-widget ui-corner-all" id="verbConjunctionBtn">Show Conjugation</button>
 				<br/><br/>
 				<table style='border-style: solid;' id="tableVerbs" class="tableWord"></table>
-					
+				<div id="nounVerbDiv" style="display:none;">
+					<label>Noun from verb</label> 
+					<label id="verbNoun" class="nounVerb"></label>
+				</div>
 			</form>
 		</div>
 		

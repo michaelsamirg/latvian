@@ -603,13 +603,17 @@ function konjugat(verb) {
             for (laiks = 0; laiks <= 2; laiks++) {
                 sakne = verb.sakne;
 
-                laikaPiedeklis = konjugacija[verb.grupa].piedekli[atgriez(verb.galotne)][personas[p]][laiks](verb.piedeklis);
+				if(konjugacija[verb.grupa] != undefined)
+				{
+					 laikaPiedeklis = konjugacija[verb.grupa].piedekli[atgriez(verb.galotne)][personas[p]][laiks](verb.piedeklis);
 
-                galotne = konjugacija[verb.grupa].galotnes[atgriez(verb.galotne)][personas[p]][laiks](verb.piedeklis);
+					galotne = konjugacija[verb.grupa].galotnes[atgriez(verb.galotne)][personas[p]][laiks](verb.piedeklis);
 
-                iznemums = iznemumi(verb, atgriez(verb.galotne), {"sakne":sakne, "galotne":galotne, "laiks":laiks, "persona":p});
+					iznemums = iznemumi(verb, atgriez(verb.galotne), {"sakne":sakne, "galotne":galotne, "laiks":laiks, "persona":p});
 
-                tabula[p].push(priedeklis + iznemums.sakne + laikaPiedeklis + iznemums.galotne);
+					tabula[p].push(priedeklis + iznemums.sakne + laikaPiedeklis + iznemums.galotne);
+				}
+               
 
             }
         }
