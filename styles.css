@@ -75,3 +75,11 @@ ul li{
     overflow-x: hidden; /* add padding to account for vertical scrollbar */
     z-index:1000 !important;
 }
+
+.oddTimeText {
+	color: #000000;
+}
+
+.evenTimeText {
+	color: #fffff9;
+}

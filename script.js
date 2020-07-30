@@ -1470,7 +1470,8 @@ $(function() {
 			cell.innerHTML = "";
 			
 			for(var i=0; i<cikVar.length; i++)
-				cell.innerHTML = cell.innerHTML + finalizeSentence(cikVar[i]) + "<br/>";
+				cell.innerHTML = cell.innerHTML + 
+								stylizeTimeText(finalizeSentence(cikVar[i]), i) + "<br/>";
 			
 			row = table.insertRow(1);
 			cell = row.insertCell(0);
@@ -1481,7 +1482,8 @@ $(function() {
 			cell.innerHTML =  "";
 			
 			for(var i=0; i<cikosVar.length; i++)
-				cell.innerHTML = cell.innerHTML + finalizeSentence(cikosVar[i]) + "<br/>";
+				cell.innerHTML = cell.innerHTML + 
+								stylizeTimeText(finalizeSentence(cikosVar[i]), i) + "<br/>";
 			
 			row = table.insertRow(2);
 			cell = row.insertCell(0);
@@ -1492,7 +1494,8 @@ $(function() {
 			cell.innerHTML =  "";
 			
 			for(var i=0; i<noCikiemVar.length; i++)
-				cell.innerHTML = cell.innerHTML + finalizeSentence(noCikiemVar[i]) + "<br/>";
+				cell.innerHTML = cell.innerHTML + 
+								stylizeTimeText(finalizeSentence(noCikiemVar[i]), i) + "<br/>";
 			
 			row = table.insertRow(3);
 			cell = row.insertCell(0);
@@ -1503,7 +1506,8 @@ $(function() {
 			cell.innerHTML =  "";
 			
 			for(var i=0; i<lidzCikiemVar.length; i++)
-				cell.innerHTML = cell.innerHTML + finalizeSentence(lidzCikiemVar[i]) + "<br/>";
+				cell.innerHTML = cell.innerHTML + 
+								stylizeTimeText(finalizeSentence(lidzCikiemVar[i]), i) + "<br/>";
 			
 		});
 		
@@ -1511,3 +1515,9 @@ $(function() {
 			loadAllVerbsList();
 		 });
 	});
+	
+	
+	function stylizeTimeText(string, index)
+	{
+		return "<span class=\"" + (index % 2 == 0 ? "oddTimeText" : "evenTimeText") + "\">" + string + "</span>";
+	}
