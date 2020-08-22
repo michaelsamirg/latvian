@@ -1,8 +1,7 @@
 sexthDeclarWords = ["acs","asins","ass","auss","avs","balss","brokastis","birzs","cilts","cēsis","dakts","debess","duris","durvis",
-				"dzelzs","govs","guns","haizivs","krāsns","krūtis","klints","kūts","klēts","kvīts","maksts","nakts", "pusnakts", "nots","nāss",
-				"pils","pults","plīts","pirts","sirds","smiltis","šalts","tāss","telts","takts","uguns","uts",
+				"dzelzs","govs","guns","haizivs", "kārts", "krāsns", "krūtis","klints","kūts","klēts","kvīts","maksts","nakts", "pusnakts", "nots","nāss","pils","pults","plīts","pirts","sirds","smiltis","šalts","tāss","telts","takts","uguns","uts",
 				"valsts","vantis","vēsts","zivs","zoss","ģints","ļaudis","acis","asinis","ausis","avis","balsis","birzis","ciltis",
-				"daktis","debesis","dzelzis","govis","gunis","krāsnis","klintis","kūtis","klētis","kvītis","makstis","naktis", "pusnaktis", 
+				"daktis","debesis","dzelzis","govis","gunis", "kārtis","krāsnis","klintis","kūtis","klētis","kvītis","makstis","naktis", "pusnaktis", 
 				"notis","nāsis", "pilis","pultis","plītis","pirtis","sirdis","šaltis","tāsis","teltis","taktis","ugunis","utis",	
 				"valstis","vēstis", "zivis","zosis","ģintis"];
 		
